@@ -1,0 +1,17 @@
+{
+  "name": "pngoung-capsule",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Portable, verified task handoffs for your AI agents",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "setup": "node scripts/setup.mjs",
+    "doctor": "node src/cli.mjs doctor",
+    "demo": "node src/cli.mjs demo",
+    "test": "node --test test/*.test.mjs",
+    "acceptance": "node scripts/acceptance.mjs"
+  },
+  "license": "MIT"
+}

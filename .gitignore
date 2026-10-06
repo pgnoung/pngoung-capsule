@@ -1,0 +1,7 @@
+.runtime/
+node_modules/
+.env
+.capsule-state/
+*.capsule
+*.tmp
+.DS_Store
