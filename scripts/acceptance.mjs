@@ -36,7 +36,8 @@ if (process.argv[1] && ['cli.mjs', 'setup.mjs'].includes(path.basename(process.a
     if (result.error || result.status !== 0) throw new Error(`Launcher ${args[0]} failed: ${result.error?.message || result.stderr || result.stdout}`);
     const observed = fs.readFileSync(trace, 'utf8').trim().split('\n').map(JSON.parse);
     assert.equal(observed.length, 1, 'Expected one application process per launcher call');
-    const canonical = file => { const resolved = fs.realpathSync(file); return win ? resolved.toLowerCase() : resolved; };
+    // The native Windows resolver expands 8.3 aliases (RUNNER~1) as well as links.
+    const canonical = file => { const resolved = fs.realpathSync.native(file); return win ? resolved.toLowerCase() : resolved; };
     assert.equal(canonical(observed[0].executable), canonical(privateNode), 'Application must run in the downloaded private Node');
     const start = result.stdout.indexOf('{');
     if (start < 0) throw new Error('Launcher returned no JSON receipt');

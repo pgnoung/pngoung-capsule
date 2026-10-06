@@ -1,0 +1,3 @@
+# Keep scripts and checksum comparisons consistent across clone and archive installs.
+* text=auto eol=lf
+*.jpg binary

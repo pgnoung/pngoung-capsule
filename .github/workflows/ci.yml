@@ -18,3 +18,6 @@ jobs:
       - run: npm test
       - name: Install private runtime and verify handoff through OS launcher
         run: npm run acceptance
+      - name: Install this published revision through the public GitHub bootstrap
+        if: github.event_name == 'push' && github.repository == 'pgnoung/pngoung-capsule'
+        run: node scripts/bootstrap-acceptance.mjs

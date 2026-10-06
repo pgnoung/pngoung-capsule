@@ -6,7 +6,7 @@
 
 ## เริ่มในคลิกเดียว
 
-ดาวน์โหลด ZIP แล้วแตกไฟล์ไว้ในโฟลเดอร์ส่วนตัว:
+[ดาวน์โหลด ZIP](https://github.com/pgnoung/pngoung-capsule/archive/refs/heads/main.zip) แล้วแตกไฟล์ไว้ในโฟลเดอร์ส่วนตัว:
 
 - **Mac:** ดับเบิลคลิก `PngoungCapsule-mac.command`
 - **Windows:** ดับเบิลคลิก `PngoungCapsule-windows.bat`
@@ -60,7 +60,7 @@ Windows ใช้ `powershell -NoProfile -ExecutionPolicy Bypass -File install\p
 
 `npm run acceptance` ทดสอบตัวติดตั้งของ OS ปัจจุบันในโฟลเดอร์ชั่วคราว ดาวน์โหลด private Node จาก nodejs.org แล้วรับ–ส่ง–final ผ่าน CLI จริง 3 โปรไฟล์จำลอง โดยไม่แตะ Skill ของผู้ใช้ และลบพื้นที่ฝึกเมื่อจบ ต้องใช้อินเทอร์เน็ต; ผลนี้ไม่ใช่การทดสอบ AI บัญชีจริง
 
-`.github/workflows/ci.yml` เตรียมรันทั้งสองชุดบน macOS/Windows/Linux เมื่อได้รับอนุมัติให้เผยแพร่และรัน CI
+`.github/workflows/ci.yml` รันทดสอบบน macOS/Windows/Linux ทุกครั้งที่ push หรือเปิด pull request ดู [ผล CI ล่าสุด](https://github.com/pgnoung/pngoung-capsule/actions/workflows/ci.yml) โดยเปิดรายละเอียดของ commit ที่ใช้
 
 แกนโปรแกรม: `src/core.mjs` · CLI: `src/cli.mjs` · ตัวติดตั้ง: `install/` · Skill: `skill/` · หน้าเริ่มต้น: `public/` ไม่มี npm runtime dependency
 
@@ -68,7 +68,21 @@ Windows ใช้ `powershell -NoProfile -ExecutionPolicy Bypass -File install\p
 
 ## ติดตั้งจาก GitHub
 
-มี bootstrap `install/get.sh` / `install/get.ps1` สำหรับ release ที่เผยแพร่และตรวจอ่านกลับแล้ว สถานะดู `docs/VALIDATION.md`; ระหว่างยังไม่เผยแพร่ให้ใช้ ZIP หรือโฟลเดอร์ที่ได้รับ
+**macOS / Linux — วางใน Terminal**
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/pgnoung/pngoung-capsule/main/install/get.sh | bash
+```
+
+**Windows — วางใน PowerShell**
+
+```powershell
+irm https://raw.githubusercontent.com/pgnoung/pngoung-capsule/main/install/get.ps1 | iex
+```
+
+ติดตั้งไว้ในโฟลเดอร์ `pngoung-capsule` ใต้ home ของคุณ แล้วเปิดหน้าเริ่มต้น หากโฟลเดอร์นี้มีอยู่แล้ว ให้เปิด launcher ภายในโฟลเดอร์เดิม; bootstrap จะไม่เขียนทับงานเดิม
+
+หากนโยบายเครื่องไม่อนุญาตการรันสคริปต์ ให้ใช้ ZIP และทำตามขั้นตอนที่องค์กรอนุญาต ดู [ผลตรวจและข้อจำกัด](docs/VALIDATION.md)
 
 Advanced: [Optional environment configuration](docs/CONFIGURATION.md). The app does not load .env files.
 
