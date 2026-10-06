@@ -4,7 +4,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { atomic, VERSION, assertNoLinks, hash } from './core.mjs';
 
-export const appRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// PowerShell and Node may enter the same installation through long or 8.3 paths.
+export const appRoot = fs.realpathSync.native(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
 export const appHome = () => path.resolve(process.env.PNGOUNG_CAPSULE_HOME || path.join(os.homedir(), '.pngoung-capsule'));
 export const skillsHome = () => path.resolve(process.env.PNGOUNG_CAPSULE_USER_HOME || os.homedir());
 const skillSource = () => fs.existsSync(path.join(appRoot, 'skill', 'SKILL.md')) ? path.join(appRoot, 'skill') : path.join(appRoot, '.agents', 'skills', 'pngoung-capsule');

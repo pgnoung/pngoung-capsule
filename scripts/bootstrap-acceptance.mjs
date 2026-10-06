@@ -29,7 +29,7 @@ try {
   for (const command of ['doctor', 'demo']) {
     const args = [path.join(app, 'src', 'cli.mjs'), command, ...(command === 'demo' ? ['--folder', path.join(scratch, 'demo')] : [])];
     const check = spawnSync(node, args, { env, cwd: scratch, encoding: 'utf8', timeout: 30000 });
-    assert.equal(check.error, undefined); assert.equal(check.status, 0, check.stderr);
+    assert.equal(check.error, undefined); assert.equal(check.status, 0, `${command}: ${check.stderr || check.stdout}`);
     assert.equal(JSON.parse(check.stdout).ok, true, command);
   }
   const canary = path.join(app, 'existing-user-file.txt');
