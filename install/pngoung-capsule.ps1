@@ -6,6 +6,12 @@ param(
   [Parameter(ValueFromRemainingArguments=$true)][string[]]$CapsuleArgs
 )
 
+# Node/cmd launched by PowerShell 7 can pass its incompatible module paths to 5.1.
+# Prefer this engine's bundled modules for this process; do not change user settings.
+if ($PSVersionTable.PSEdition -eq 'Desktop') {
+  $env:PSModulePath = [IO.Path]::Combine($PSHOME, 'Modules') + [IO.Path]::PathSeparator + $env:PSModulePath
+}
+
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12

@@ -1,3 +1,7 @@
+# Prefer Windows PowerShell's own modules when launched through a PS7 child process.
+if ($PSVersionTable.PSEdition -eq 'Desktop') {
+  $env:PSModulePath = [IO.Path]::Combine($PSHOME, 'Modules') + [IO.Path]::PathSeparator + $env:PSModulePath
+}
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
